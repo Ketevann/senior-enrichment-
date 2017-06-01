@@ -21,10 +21,10 @@ return newState;
       return statenew
 
       case 'REMOVE_STUDENT':
-      return state.students.filter((student) => {
+      let arr = state.students.filter((student) => {
         console.log(student.id, action.id)
         return (student.id !== action.id)});
-
+        return {students : arr}
       case 'GET_CAMPUS':
     console.log(action.campuses, " reducer campus")
       return  Object.assign({}, state, {campuses: action.campuses})
