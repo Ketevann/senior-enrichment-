@@ -11,12 +11,17 @@ import {editStudent} from '../redux/students';
 // import { addStory } from '../../redux/stories';
 
 /* -----------------    COMPONENT     ------------------ */
+console.log(editStudent, "!!!!!!!!!")
 
-
-const handleSubmit = (event) => {
+const handleSubmit = (event,id) => {
   event.preventDefault();
-  console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE")
+  console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE", id)
+  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value, campusID:id }
+  console.log(data)
 
+ editStudent(id, data)
+  event.target.name.value = '';
+    event.target.email.value = '';
 
 }
 
@@ -40,7 +45,7 @@ const handleSubmit = (event) => {
             <h2 className="panel-title large-font">Info</h2>
           </div>
           <ul className="list-group">
-            <form className="list-group-item story-item" onSubmit={(val) => handleSubmit(val)}>
+            <form className="list-group-item story-item" onSubmit={(val) => handleSubmit(val, this.props.students.students[0].id)}>
               <input
                 name="name"
                 type="text"

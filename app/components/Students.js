@@ -21,7 +21,7 @@ const handleSubmit = (event) => {
 }
 
 
-export default class Students extends React.Component {
+ class Students extends React.Component {
 
   render() {
    // {console.log(this.props, " PROPS 300")}
@@ -30,15 +30,16 @@ export default class Students extends React.Component {
     return (
      <div className="container">
         <div className="user-query"></div>
-        { console.log(this.props, " prop in student", this.props.students.all, Object.keys(this.props.students))}
+        { console.log(this.props, this.props.students.length, " prop in student", this.props.students.all, Object.keys(this.props.students))}
        <br />
         <br />
 
         <div className="user-list">
-        {this.props.students.students.map(student => <Student student={student.name} email={student.email} campus={student.campusnameId} id={student.id} />
+        { this.props.students.length  > 0 ?
+          this.props.students.map(student => <Student student={student.name} email={student.email} campus={student.campusnameId} id={student.id} />
 
-        )}
-      <Link to="students/add">
+        ) : null}
+      <Link to ="students/add">
         <button>Add Students</button>
       </Link>
 </div>
@@ -52,3 +53,9 @@ export default class Students extends React.Component {
 
 }
 
+
+const mapState = ({ students }) => ({ students });
+
+const mapDispatch = { addStudent };
+
+export default connect(mapState, mapDispatch)(Students);

@@ -73,15 +73,24 @@ api.post('/students', function (req, res, next) {
 });
 
 api.put('/students/:id', function (req, res, next) {
+	console.log(req.body, "Put")
 	return User.findOne({
 		where: {
 			id: req.params.id
 		}
 	})
 	.then(user =>{
-		user.update(req.body)
+	return	user.update({
+		name : req.body.name,
+		email: req.body.email,
+		campusnameId : req.body.campudID
 	})
-	.then(user => res.status(201).json(user))
+
+
+	})
+	.then(user => {
+		console.log(user," USAA")
+		res.status(201).json(user)})
 		.catch(console.error());
 });
 

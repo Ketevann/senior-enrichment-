@@ -13,6 +13,8 @@ import store from '../store'
 const ADD_STUDENT = 'ADD_STUDENT';
 const GET_STUDENT = 'GET_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
+const EDIT_STUDENT = 'EDIT_STUDENT';
+
 
 
 
@@ -23,6 +25,8 @@ const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const get = students => ({ type: GET_STUDENT, students });
 const add = students => ({ type: ADD_STUDENT, students });
 const remove = id => ({ type: REMOVE_STUDENT, id });
+const edit = id => ({ type: EDIT_STUDENT, id });
+
 
 
 
@@ -59,6 +63,13 @@ export const addStudent = student  => {
 export const removeStudent = id  => {
  store.dispatch(remove(id));
   axios.delete(`/api/students/${id}`)
+    .catch(err => console.error(`Creating user: ${id} unsuccesful`, err))
+
+}
+export const editStudent = (id, user)  => {
+
+  axios.put(`/api/students/${id}`,  user)
+  .then(res => store.dispatch(edit(res.data)))
     .catch(err => console.error(`Creating user: ${id} unsuccesful`, err))
 
 }
