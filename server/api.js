@@ -41,6 +41,11 @@ api.get('/students/:id', (req, res, next) => {
 		.catch(console.error())
 })
 
+api.get('/students/:campusId', (req, res, next) => {
+	console.log("GET CAMPUS STUDENT", req.body)
+ res.end()
+})
+
 
 
 api.post('/students', function (req, res, next) {

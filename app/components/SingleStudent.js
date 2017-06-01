@@ -12,8 +12,9 @@ import {editStudent} from '../redux/students';
 
 /* -----------------    COMPONENT     ------------------ */
 console.log(editStudent, "!!!!!!!!!")
-
+let removed = false;
 const handleSubmit = (event,id) => {
+  removed = true;
   event.preventDefault();
   console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE", id)
   let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value, campusID:id }
@@ -27,7 +28,7 @@ const handleSubmit = (event,id) => {
 
 
 
- export default class SingleStudent extends React.Component {
+class SingleStudent extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,17 +36,21 @@ const handleSubmit = (event,id) => {
   }
 
   render() {
-    {console.log(this.props.students.students.name, 'SINGLE STUDENT',this.props.students.students[0], "***", this.props.students[0])}
+    {console.log(this.props.student, 'SINGLE STUDENT', "***", removed, "removed" )}
+
      // the user id is invalid or data isn't loaded yet
+
+     if (!this.props.student) return <div />
     return (
       <div className="container">
-      <Student student={this.props.students.students[0].name} email={this.props.students.students[0].email} campus={this.props.students.students[0].campusnameId} />
+
+      <Student student={this.props.student.name} email={this.props.student.email} campus={this.props.student.campusnameId} id={this.props.student.id} />
         <div className="panel panel-warning">
           <div className="panel-heading">
             <h2 className="panel-title large-font">Info</h2>
           </div>
           <ul className="list-group">
-            <form className="list-group-item story-item" onSubmit={(val) => handleSubmit(val, this.props.students.students[0].id)}>
+            <form className="list-group-item story-item" onSubmit={(val) => handleSubmit(val, this.props.students.id)}>
               <input
                 name="name"
                 type="text"
@@ -76,6 +81,7 @@ const handleSubmit = (event,id) => {
 
           </ul>
         </div>
+
       </div>
     );
   }
@@ -94,14 +100,17 @@ const handleSubmit = (event,id) => {
 
 /* -----------------    CONTAINER     ------------------ */
 
-// const mapState = ({ users, stories }, ownProps) => {
-//   const param_id = Number(ownProps.params.id);
-//   return {
-//     user: _.find(users, user => user.id === param_id),
-//     stories
-//   };
-// };
+//const mapState = ({ students }) => ({ students });
 
-// const mapDispatch = { handleSubmit, editStudent };
+const mapState = ({ students }, ownProps) => {
+  console.log(ownProps.params.studenId, students, "params")
+  const param_id = Number(ownProps.params.studenId);
 
-// export default connect(state => state, mapDispatch)(SingleStudent);
+   var arr = students.filter(student => (student.id === param_id) )
+     return {student : arr[0]}
+
+};
+
+ const mapDispatch = { handleSubmit, editStudent };
+
+ export default connect(mapState, mapDispatch)(SingleStudent);

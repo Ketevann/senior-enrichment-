@@ -9,7 +9,7 @@ import store from './store'
 import Root from './components/Root.jsx'
 import Students from './components/Students'
 import {Home} from './components/Home'
-import {fetchStudent, fetchCampuses} from './redux/students'
+import {fetchStudent, fetchCampuses, fetchCampusStudents} from './redux/students'
 import {StudentAdd} from './components/StudentAdd'
 import {AddCampus} from './components/AddCampus'
 import Campuses from './components/Campuses'
@@ -31,7 +31,7 @@ render(
      <Route path="/students" component={Students} onEnter={fetchStudent} />
      <Route path="/Home" component={Home} onEnter={fetchCampuses()}  />
       <Route path="/students/add" component={StudentAdd} />
-       <Route path="/campuses" component={Campuses} />
+       <Route path="/campuses" component={Campuses} onEnter={fetchCampuses} />
        <Route path="/campuses/add" component={AddCampus} />
      <Route path="/students/:studenId" component={SingleStudent} />
      <Route path="/campuses/:campusId" component={campus} />

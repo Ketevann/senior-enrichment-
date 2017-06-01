@@ -89,8 +89,8 @@ export const fetchCampuses = ()  => {
     .then(() => { console.log("dataaa capmpus") })
 
 };
-export const fetchCampusStudents = () => dispatch => {
-  axios.get('/api/students/:campusId')
+export const fetchCampusStudents = (campusId)  => {
+  axios.get('/api/students/:campusId', campusId)
     .then(res => store.dispatch({ type: "GET_STUDENT", students: res.data }))
     .then(() => { console.log("dataaa") })
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Student from './Student'
 
 
 const Campus = (props) => {
@@ -9,7 +10,7 @@ const Campus = (props) => {
   <div>
 
 
- <h1>STUDENTS</h1>
+ <Student />
 
 
 
