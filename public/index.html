@@ -1,9 +1,61 @@
 <!doctype html>
 <html>
+
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
   </head>
+<style>
+  .campuses{
+    margin: auto;
+    padding :40px;
+  }
+  img {
+    height :200px;
+  }
+  #main {
+    background-color: black;
+  }
+  form {
+    padding: 15px;
+  }
+ #studentList {
+     display: block;
+    background-color: lavenderblush
+  }
+</style>
   <body>
+
     <div id="main"></div>
-    <script async defer src="/bundle.js"></script>    
+
+
+
+    <script async defer src="/bundle.js"></script>
+
   </body>
-</html> 
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Auther</title>
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+
+  <!--external CSS dependencies-->
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/bootstrap-social/bootstrap-social.css" />
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.css" />
+
+  <!--local CSS dependencies-->
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+
+  <!--external JS dependencies-->
+  <script src="/jquery/dist/jquery.min.js"></script>
+  <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  <div id="app"></div>
+   <!--local JS dependencies, from Webpack -->
+  <script src="/bundle.js"></script>
+</body>
+</html>

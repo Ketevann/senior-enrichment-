@@ -1,5 +1,5 @@
 {
-  "name": "Project Name",
+  "name": "enrinchment",
   "version": "0.0.1",
   "description": "A review time project",
   "main": "index.js",
@@ -20,6 +20,8 @@
     "express": "^4.14.0",
     "pg": "^6.1.0",
     "pg-native": "^1.10.0",
+    "bootstrap": "^3.3.7",
+    "bootstrap-social": "^5.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
