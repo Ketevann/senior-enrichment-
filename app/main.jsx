@@ -31,7 +31,7 @@ render(
      <Route path="/students" component={Students} onEnter={fetchStudent} />
      <Route path="/Home" component={Home} onEnter={fetchCampuses()}  />
       <Route path="/students/add" component={StudentAdd} />
-       <Route path="/campuses" component={Campuses} onEnter={fetchCampuses} />
+       <Route path="/campuses" component={Campuses} />
        <Route path="/campuses/add" component={AddCampus} />
      <Route path="/students/:studenId" component={SingleStudent} />
      <Route path="/campuses/:campusId" component={campus} />

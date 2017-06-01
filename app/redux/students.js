@@ -41,7 +41,7 @@ console.log("IN REDUCER")
 //     .then(res => dispatch(init(res.data)));
 // };
 
-export const fetchStudent = () => {
+export const fetchStudent = ()=> {
   axios.get('/api/students')
      .then(res => store.dispatch(get(res.data)))
     .then(() => { console.log("dataaa") })
@@ -90,7 +90,8 @@ export const fetchCampuses = ()  => {
 
 };
 export const fetchCampusStudents = (campusId)  => {
-  axios.get('/api/students/:campusId', campusId)
+  console.log("getting")
+  axios.get(`/api/${campusId}/students`, campusId)
     .then(res => store.dispatch({ type: "GET_STUDENT", students: res.data }))
     .then(() => { console.log("dataaa") })
 

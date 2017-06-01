@@ -41,9 +41,27 @@ api.get('/students/:id', (req, res, next) => {
 		.catch(console.error())
 })
 
-api.get('/students/:campusId', (req, res, next) => {
-	console.log("GET CAMPUS STUDENT", req.body)
- res.end()
+api.get('/:campusId/students', (req, res, next) => {
+	console.log("GET CAMPUS STUDENT", req.body, req.params.campusId)
+	return Campus.findOne({
+		where: {
+			id: req.params.campusId
+		}
+	})
+	.then(campus => {
+		console.log(campus, "campus")
+		return User.findAll(
+			{where:{
+
+
+		campusnameId: campus.id}
+			})
+	})
+	.then(user =>{
+		console.log(user)
+		res.send(user)
+	})
+
 })
 
 
