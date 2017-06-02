@@ -1,73 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import {fetchCampusStudents, removeCampus} from '../redux/students'
+import { fetchCampusStudents, removeCampus } from '../redux/students'
+import CampusInfo from './CampusInfo';
 
 
-const Campuses = (props) => {
- {console.log(props.campuses,  "prop!!***********************!" )}
+class Campuses extends React.Component {
 
-const handleSubmit = id => {
-  console.log("YAYYYY", id)
-  fetchCampusStudents(id)
+  constructor(props) {
+    super(props)
   }
+  render() {
+    return (
+      <div className="row">
 
-const removeUserCallback = (id) => {
-console.log(id, "ID IN CAMPUS")
-    event.stopPropagation();
-    removeCampus(id);
+
+          {this.props.campuses.length > 0 ?
+            this.props.campuses.map(campus => <CampusInfo campus={campus.name} imageUrl={campus.imageUrl} id= {campus.id}/>
+
+            ) : null}
+
+        <Link to="campuses/add">
+          <button>Add Campus</button>
+        </Link>
+
+      </div>
+
+    )
+
   }
- return(
-  <div className="row">
-
-{
- props.campuses.map((campus) => {
-
-  console.log(campus, "CAMPUSSS")
-
-      return(
-        <div className=" col-md-4">
-        <Link to={`/campuses/${campus.id}`}> <h3  onClick={() => handleSubmit(campus.id)}> {campus.name} </h3>
-
-
-       </Link>
-
-       <img
-
-        id={campus.name}src={(campus.imageUrl)} />
-        <div>
-
-        <button className="btn btn-default edit"  > Edit
-              <span />
-            </button>
-            <button onClick={() => removeUserCallback(campus.id)}                 className="btn btn-default remove"
-                >Remove
-              <span  />
-            </button>
-            </div>
-        </div>
-        )
-    })
-
-
 }
 
-<Link to="campuses/add">
-        <button>Add Campus</button>
-      </Link>
-
-</div>
-
- )
 
 
-}
+
+
+
+
+
+
 
 
 
 
 const mapState = ({ campuses }) => ({ campuses });
 
-const mapDispatch = null;
+const mapDispatch = { fetchCampusStudents, removeCampus };
 
 export default connect(mapState, mapDispatch)(Campuses);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

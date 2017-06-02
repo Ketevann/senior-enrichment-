@@ -1,67 +1,83 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { removeStudent, editStudent } from '../redux/students'
+import { fetchCampusStudents, removeCampus } from '../redux/students'
 // import { removeStory } from '../../redux/stories';
 
 /* -----------------    COMPONENT     ------------------ */
-console.log(removeStudent.toString())
- class CampusInfo extends React.Component {
 
+ class CampusInfo extends React.Component {
   constructor (props) {
     super(props);
     this.removeUserCallback = this.removeUserCallback.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   render () {
-    {console.log(this.props, "student oneee")}
+    {console.log(this.props, "student student Info", this.props.id)}
+     const {id} = this.props.id;
+    {console.log({id}, "CAMPUS ID")}
     return (
-      <div className="list-group-item min-content user-item">
-        <div className="media">
-          <div className="media-left media-middle icon-container">
 
-          </div>
-          <Link
-            className="media-body"
-            activeClassName="active"
-            to={`/students/${this.props.id}`}>
-            <h4 className="media-heading tucked">
-              <span placeholder="Jean Doe"></span>
-            </h4>
-            <h5 className="tucked">
-              <span></span>
-            </h5>
-            <h5 className="tucked">
-              <span></span>
-            </h5>
-          </Link>
-          <div className="media-right media-middle">
-          <button
-                className="btn btn-default"
-                >
-              <span className="glyphicon glyphicon-remove" />
-            </button>
-            <button
-                className="btn btn-default"
-               >
-              <span className="glyphicon glyphicon-edit" />
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+         <div className=" col-md-4">
+                <Link to={`/campuses/${this.props.id}`}> <h3 onClick={() => this.handleSubmit(this.props.id)}> {this.props.campus} </h3>
+                </Link>
+                <img id={this.props.campus} src={(this.props.imageUrl)} />
+                <div>
+                  <button className="btn btn-default edit"  > Edit
+              <span />
+                  </button>
+                  <button onClick={() => this.removeUserCallback(this.props.id)} className="btn btn-default remove"
+                  >Remove
+              <span />
+                  </button>
+                </div>
+              </div>
+            )
+
+
+
+        }
+       handleSubmit(id) {
+    console.log("YAYYYY", id)
+    fetchCampusStudents(id)
   }
 
-  removeUserCallback (event) {
-
+  removeUserCallback(id) {
+    console.log(id, "ID IN CAMPUS")
     event.stopPropagation();
-    removeStudent(this.props.id);
+    removeCampus(id);
   }
-}
+
+
+
+  }
+
+
+
+
+
+
+
+
+
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = (state ) => ( state );
-const mapDispatch = { removeStudent, editStudent };
+const mapState = ({campuses} ) => ( {campuses} );
+const mapDispatch = { removeCampus, fetchCampusStudents };
 
 export default connect(mapState, mapDispatch)(CampusInfo);
+
+
+
+
+
+
+/* -----------------    CONTAINER     ------------------ */
+
+
+
+
+

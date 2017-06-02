@@ -7,30 +7,16 @@ import {addStudent} from '../redux/students';
 
 
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE")
-  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value }
-  console.log(data)
-
-  addStudent(data)
-  event.target.name.value = '';
-    event.target.email.value = '';
-        event.target.campus.value = '';
 
 
-}
-
-
-
-
-
-
-
-  export const StudentAdd = (props) => {
+   class StudentAdd extends React.Component{
+    constructor(){
+      super()
+    }
+     render(){
    return (
    <div className="list-group-item min-content user-item">
-        <form className="media" onSubmit={(val) => handleSubmit(val)} >
+        <form className="media" onSubmit={(val) => this.handleSubmit(val)} >
           <div className="media-left media-middle icon-container">
             <button
               type="submit"
@@ -60,7 +46,7 @@ const handleSubmit = (event) => {
               <input
                 name="campus"
                 type="tel"
-                placeholder="campus Name"
+                placeholder="campus"
                 className="form-like"
               />
             </h5>
@@ -69,10 +55,23 @@ const handleSubmit = (event) => {
       </div>
     );
   }
+  handleSubmit (event) {
+  event.preventDefault();
+  console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE")
+  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value }
+  console.log(data)
+
+  addStudent(data)
+  event.target.name.value = '';
+    event.target.email.value = '';
+        event.target.campus.value = '';
+
+
+}
+   }
+const mapDispatch = { addStudent };
 
 
 
-
-
-
+export default connect(state => state, mapDispatch)(StudentAdd)
 

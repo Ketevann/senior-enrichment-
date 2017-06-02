@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Student from './Student';
 import {editStudent} from '../redux/students';
+import _ from 'lodash';
+
 
 
 // import _ from 'lodash';
@@ -16,7 +18,7 @@ let removed = false;
 const handleSubmit = (event,id) => {
   event.preventDefault();
   console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE", id)
-  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value, campusID:id }
+  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value, user:id }
   console.log(data)
 
  editStudent(id, data)
@@ -93,16 +95,24 @@ const SingleStudent = (props) => {
 //const mapState = ({ students }) => ({ students });
 
 const mapState = ({ students }, ownProps) => {
-  console.log(ownProps.params.studenId, students, students[0], "params")
+  console.log(ownProps.params.studenId, students,  "params")
   const param_id = Number(ownProps.params.studenId);
 let arr = []
-if (students.length > 1){
-    arr = students.filter(student => (student.id === param_id) )
-     return {student : arr[0]}}
-     else return {student : students[0]}
+
+    // arr = students.filter(student => (student.id === param_id) )
+    //  return {student : arr[0]}
+
+return {
+  student: _.find(students, student => student.id === param_id)
+
+}
 
 
-};
+}
+
+
+
+
 
  const mapDispatch = null;
 

@@ -109,7 +109,7 @@ api.put('/students/:id', function (req, res, next) {
 		return	user.update({
 		name : req.body.name,
 		email: req.body.email,
-		campusnameId : req.body.campus.id
+		campusnameId : campus.id
 	})
 
 

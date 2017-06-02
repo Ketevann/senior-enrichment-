@@ -54,7 +54,7 @@ export const fetchStudent = ()=> {
 
 };
 
-export const addStudent = student  => {
+export const addStudent = student   => {
   console.log("HEREERERERERER")
   axios.post('/api/students', student)
     .then(res => store.dispatch(add(res.data)))

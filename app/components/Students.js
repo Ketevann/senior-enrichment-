@@ -24,8 +24,7 @@ const handleSubmit = (event) => {
  class Students extends React.Component {
 
   render() {
-   // {console.log(this.props, " PROPS 300")}
-    ///const studentsAll = this.props.students.students;
+   {console.log(this.props, " PROPS 300")}
 
     return (
      <div className="container">
