@@ -11,11 +11,11 @@ import Students from './components/Students'
 import {Home} from './components/Home'
 import {fetchStudent, fetchCampuses, fetchCampusStudents} from './redux/students'
 import {StudentAdd} from './components/StudentAdd'
-import {AddCampus} from './components/AddCampus'
+import AddCampus from './components/AddCampus'
 import Campuses from './components/Campuses'
 import SingleStudent from './components/SingleStudent'
 
-import campus from './components/campus'
+import OneCampus from './components/OneCampus'
 
 
 
@@ -31,10 +31,11 @@ render(
      <Route path="/students" component={Students} onEnter={fetchStudent} />
      <Route path="/Home" component={Home} onEnter={fetchCampuses()}  />
       <Route path="/students/add" component={StudentAdd} />
-       <Route path="/campuses" component={Campuses} />
+       <Route path="/campuses" component={Campuses} onEnter={fetchCampuses()} />
        <Route path="/campuses/add" component={AddCampus} />
      <Route path="/students/:studenId" component={SingleStudent} />
-     <Route path="/campuses/:campusId" component={campus} />
+     <Route path="/students/:studenId" component={SingleStudent} />
+     <Route path="/campuses/:campusId" component={OneCampus} />
 
     <Route path="*" component={Home} />
     </Route>

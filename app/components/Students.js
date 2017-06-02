@@ -35,13 +35,15 @@ const handleSubmit = (event) => {
         <br />
 
         <div className="user-list">
+        <Link to ="students/add">
+                    <button type="button" className="btn btn-info">Add Students</button>
+
+      </Link>
         { this.props.students.length  > 0 ?
           this.props.students.map(student => <Student student={student.name} email={student.email} campus={student.campusnameId} id={student.id} />
 
         ) : null}
-      <Link to ="students/add">
-        <button>Add Students</button>
-      </Link>
+
 </div>
       </div>
 

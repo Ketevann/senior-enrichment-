@@ -66,14 +66,17 @@ api.get('/:campusId/students', (req, res, next) => {
 
 
 
+
+
+
 api.post('/students', function (req, res, next) {
 	console.log(req.body, "REQ BODY!!!!")
 
-	return Campus.findOne({
+	 Campus.findOrCreate({
 		where: {
 			name: req.body.campus
 		}
-	}).then(campus => {
+	}).spread((campus, created) => {
 		return User.create(req.body)
 			.then(user => {
 				console.log(user, '**')
@@ -81,18 +84,13 @@ api.post('/students', function (req, res, next) {
 			}).then(user => {
 				res.send(user)
 			})
+			})
 			.catch(console.error());
 
 
 
 
-	})
-		.then((user) => {
-			console.log(user, "ISEERR")
-			res.status(201).json(user)
 
-		})
-		.catch(console.error());
 });
 
 api.put('/students/:id', function (req, res, next) {
@@ -103,19 +101,26 @@ api.put('/students/:id', function (req, res, next) {
 		}
 	})
 	.then(user =>{
-	return	user.update({
+		return Campus.findOrCreate({
+		where: {
+			name: req.body.campus
+		}
+	}).spread((campus, created) => {
+		return	user.update({
 		name : req.body.name,
 		email: req.body.email,
-		campusnameId : req.body.campudID
+		campusnameId : req.body.campus.id
 	})
 
 
 	})
-	.then(user => {
+
+})
+.then(user => {
 		console.log(user," USAA")
-		res.status(201).json(user)})
+		res.status(201).send(user)})
 		.catch(console.error());
-});
+})
 
 api.delete('/students/:id', function (req, res, next) {
 	return User.findOne({
@@ -184,18 +189,55 @@ api.post('/campus', function (req, res, next) {
 });
 
 api.put('/campus/:id', function (req, res, next) {
-	Campus.update(req.body)
-		.then(user => res.status(201).json(user))
-		.catch(console.error());
-});
+	console.log(req.body, "Put CAMP")
+	return Campus.findById(req.params.id)
+		.then(campus => {
+		return	campus.update({
+				name: req.body.name,
+				imageUrl: req.body.imageUrl,
+				id : req.body.campusID
+			 })
+		})
+		.then(campus => {
+			console.log(campus," USAA")
+		res.status(201).send(campus)})
+
+
+	.catch(console.error());
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 api.delete('/campus/:id', function (req, res, next) {
-	Campus.destroy()
-		.then(user => res.status(201).json(user))
-		.catch(console.error());
-});
+	console.log(req.body.id, "CAMPUS IDDDD")
+	return Campus.findOne({
+		where: {
+			id : req.params.id
+		}
+	})
+	.then(campus => {
 
+console.log(campus)
+	return campus.destroy()
 
+})
+.then(() => {
+	res.send(204)
+})
+.catch(console.error())
+})
 
 
 

@@ -6,7 +6,7 @@ import { removeStudent, editStudent } from '../redux/students'
 
 /* -----------------    COMPONENT     ------------------ */
 console.log(removeStudent.toString())
- class Student extends React.Component {
+ class CampusInfo extends React.Component {
 
   constructor (props) {
     super(props);
@@ -26,24 +26,24 @@ console.log(removeStudent.toString())
             activeClassName="active"
             to={`/students/${this.props.id}`}>
             <h4 className="media-heading tucked">
-              <span placeholder="Jean Doe">{this.props.student}</span>
+              <span placeholder="Jean Doe"></span>
             </h4>
             <h5 className="tucked">
-              <span>{this.props.email}</span>
+              <span></span>
             </h5>
             <h5 className="tucked">
-              <span>{this.props.campus}</span>
+              <span></span>
             </h5>
           </Link>
           <div className="media-right media-middle">
           <button
                 className="btn btn-default"
-                onClick={this.removeUserCallback}>
+                >
               <span className="glyphicon glyphicon-remove" />
             </button>
             <button
                 className="btn btn-default"
-                onClick={this.removeUserCallback}>
+               >
               <span className="glyphicon glyphicon-edit" />
             </button>
           </div>
@@ -64,4 +64,4 @@ console.log(removeStudent.toString())
 const mapState = (state ) => ( state );
 const mapDispatch = { removeStudent, editStudent };
 
-export default connect(mapState, mapDispatch)(Student);
+export default connect(mapState, mapDispatch)(CampusInfo);

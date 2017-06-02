@@ -14,9 +14,14 @@ const initialState ={students : [], campuses :[]}
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
     case 'ADD_STUDENT':
-
+    console.log("Adding", action)
        const newState = Object.assign({}, state, {students: action.students})
-return newState;
+       return newState;
+    case 'EDIT_STUDENT':
+    console.log(action, state,' ACTION')
+
+       const edited = Object.assign({}, state, {students: action.student})
+return edited;
      case 'GET_STUDENT':
      console.log(action.students, " reducer")
       const statenew = Object.assign({}, state, {students: action.students})
@@ -29,14 +34,29 @@ return newState;
         console.log(student.id, action.id)
         return (student.id !== action.id)});
         }
-       return {students :arr}
+       return {students :arr, campuses :  state.campuses}
       case 'GET_CAMPUS':
     console.log(action.campuses, " reducer campus")
       return  Object.assign({}, state, {campuses: action.campuses})
 
 
     case 'ADD_CAMPUS':
-       return Object.assign({}, state, {campuses: action.campuses})
+       const newCampusState = Object.assign({}, state, {campuses: action.campuses})
+
+return newCampusState;
+
+    case 'REMOVE_CAMPUS':
+      let campusArr = [];
+      console.log(state.campuses, "REDUCER CAMPUSES")
+      if (state.campuses.length >1) {
+       campusArr = state.campuses.filter((campus) => {
+        console.log(campus.id, action.id)
+        return (campus.id !== action.id)});
+      }return {students :state.students, campuses :  campusArr}
+       case 'EDIT_CAMPUS':
+       console.log(action, "IN REU")
+       const editedCampus = Object.assign({}, state, {campuses: state.campuses})
+return editedCampus;
 
     default: return state;
   }

@@ -16,6 +16,8 @@ const handleSubmit = (event) => {
   addStudent(data)
   event.target.name.value = '';
     event.target.email.value = '';
+        event.target.campus.value = '';
+
 
 }
 
@@ -58,7 +60,7 @@ const handleSubmit = (event) => {
               <input
                 name="campus"
                 type="tel"
-                placeholder="campus"
+                placeholder="campus Name"
                 className="form-like"
               />
             </h5>

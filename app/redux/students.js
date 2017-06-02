@@ -14,6 +14,9 @@ const ADD_STUDENT = 'ADD_STUDENT';
 const GET_STUDENT = 'GET_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
 const EDIT_STUDENT = 'EDIT_STUDENT';
+const REMOVE_CAMPUS = 'REMOVE_CAMPUS';
+const EDIT_CAMPUS = 'EDIT_CAMPUS';
+
 
 
 
@@ -23,9 +26,12 @@ const EDIT_STUDENT = 'EDIT_STUDENT';
 
 
 const get = students => ({ type: GET_STUDENT, students });
-const add = students => ({ type: ADD_STUDENT, students });
+const add = students => ({ type: 'ADD_STUDENT', students });
 const remove = id => ({ type: REMOVE_STUDENT, id });
-const edit = id => ({ type: EDIT_STUDENT, id });
+const edit = student => ({ type: EDIT_STUDENT, student });
+const deleteCampus = id => ({ type: REMOVE_CAMPUS, id });
+const updateCampus = campus => ({ type: EDIT_CAMPUS, campus});
+
 
 
 
@@ -52,9 +58,7 @@ export const addStudent = student  => {
   console.log("HEREERERERERER")
   axios.post('/api/students', student)
     .then(res => store.dispatch(add(res.data)))
-    .then(() =>{
-      console.log("FSFSFSFSF")
-    })
+
     .catch(err => console.error(`Creating user: ${student} unsuccesful`, err))
 
 }
@@ -69,11 +73,23 @@ export const removeStudent = id  => {
 export const editStudent = (id, user)  => {
 
   axios.put(`/api/students/${id}`,  user)
-  .then(res => store.dispatch(edit(res.data)))
+  .then(res => {
+    console.log(res.data, "redDAta")
+    return  store.dispatch(edit(res.data)) })
+
     .catch(err => console.error(`Creating user: ${id} unsuccesful`, err))
 
 }
 
+export const editCampus = (id, campus)  => {
+
+  axios.put(`/api/campus/${id}`,  campus)
+  .then(res => {
+    console.log(res.data, "UPD")
+    store.dispatch(updateCampus(res.data))})
+    .catch(err => console.error(`Creating user: ${id} unsuccesful`, err))
+
+}
 
 export const addCampus = (data) => {
   axios.post('/api/campus', data)
@@ -82,6 +98,13 @@ export const addCampus = (data) => {
 
 }
 
+export const removeCampus = id  => {
+  console.log(id, "remove campus ID ")
+ store.dispatch(deleteCampus(id));
+  axios.delete(`/api/campus/${id}`, id)
+    .catch(err => console.error(`Creating user: ${id} unsuccesful`, err))
+
+}
 
 export const fetchCampuses = ()  => {
   axios.get('/api/campuses')

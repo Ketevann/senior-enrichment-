@@ -8,18 +8,16 @@ import store from '../store'
 
 
 export default class Nabar extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
   }
-handleClick() {
-    console.log("****** LOVE CAKE")
+  handleClick() {
     axios.get('/api/students')
       .then(res => {
         return res.data
       })
       .then(student => {
-      //  console.log(student, "student!!!")
 
       }
 
@@ -27,31 +25,31 @@ handleClick() {
       )
   }
 
-render(){
-  {console.log(" I AM IN NAVBAR", this.props)}
+  render() {
 
-  return (
-   <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-
+    return (
+      <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
 
 
-  <div className="collapse navbar-collapse" id="navbarNav">
 
+        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className="buttons">
           <Link to='/Home'><button type="button" className="btn btn-info">Home</button></Link>
-      <Link to='/students'>
-      <button onClick={this.handleClick()}type="button" className="btn btn-info">Students</button></Link>
-    <h4>{this.props.students}</h4>
+          <Link to='/students'>
+            <button  type="button" className="btn btn-info">Students</button></Link>
+            <Link to="/campuses">
+            <button type="button" className="btn btn-info">Campuses</button>
+          </Link>
+          </div>
+          <h4>{this.props.students}</h4>
 
-<Link to="/campuses">
-        <button>Campuses</button>
-      </Link>
 
 
-  </div>
-</nav>
+        </div>
+      </nav>
 
-  );
-}
+    );
+  }
 }
 
 
