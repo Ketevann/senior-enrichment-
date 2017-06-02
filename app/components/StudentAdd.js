@@ -1,21 +1,15 @@
- import React from 'react';
-import { Link } from 'react-router';
+import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import store from '../store'
-import {addStudent} from '../redux/students';
+import { addStudent } from '../redux/students';
 
 
-
-
-
-   class StudentAdd extends React.Component{
-    constructor(){
-      super()
-    }
-     render(){
-   return (
-   <div className="list-group-item min-content user-item">
+//Form for adding students (name, email, campusname)
+//calls a submithandler after submitting the form
+//submithandler calls addStudents function which adds a new student
+class StudentAdd extends React.Component {
+    render() {
+    return (
+      <div className="list-group-item min-content user-item">
         <form className="media" onSubmit={(val) => this.handleSubmit(val)} >
           <div className="media-left media-middle icon-container">
             <button
@@ -55,23 +49,20 @@ import {addStudent} from '../redux/students';
       </div>
     );
   }
-  handleSubmit (event) {
-  event.preventDefault();
-  console.log(event.target.name.value, event.target.email.value, event.target.campus.value, "NAMEEEE")
-  let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value }
-  console.log(data)
+  handleSubmit(event) {
+    event.preventDefault();
+    let data = { name: event.target.name.value, email: event.target.email.value, campus: event.target.campus.value }
 
-  addStudent(data)
-  event.target.name.value = '';
+    addStudent(data);
+    //clears the input values
+    event.target.name.value = '';
     event.target.email.value = '';
-        event.target.campus.value = '';
+    event.target.campus.value = '';
 
 
+  }
 }
-   }
 const mapDispatch = { addStudent };
 
-
-
-export default connect(state => state, mapDispatch)(StudentAdd)
+export default connect(state => state, mapDispatch)(StudentAdd);
 
