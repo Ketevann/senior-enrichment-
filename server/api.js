@@ -55,13 +55,13 @@ api.get('/:campusId/students', (req, res, next) => {
 
 
 api.post('/students', function (req, res, next) {
-	console.log(req.body, "E#$")
+
 	Campus.findOrCreate({
 		where: {
 			name: req.body.campus
 		}
 	}).spread((campus) => {
-		return User.findOrCreate({
+		  User.findOrCreate({
 			where: {
 				name: req.body.name,
 				email: req.body.email
@@ -114,11 +114,6 @@ api.delete('/students/:id', function (req, res, next) {
 		.catch(console.error());
 
 });
-
-
-
-
-
 
 
 
